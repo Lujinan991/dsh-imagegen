@@ -2,28 +2,34 @@
 
 这是 DSH 原生 Cordis 插件，不是 MCP 包装，也不需要单独启动服务。
 
+让智能体用 `generate_image` 生成或编辑位图：文生图、参考图改图、PNG 蒙版局部编辑；图片保存为 DSH 持久附件并在对话里直接预览。
+
 ## 安装
 
-在 DSH 左侧「插件」页面的安装入口，输入本地插件目录：
+在 DSH 左侧「插件」页面的安装入口填入本仓库地址：
 
 ```text
-/Users/lujinan/Documents/deepseek-harness/default-workspace/dsh-imagegen
+git+https://github.com/Lujinan991/dsh-imagegen.git
 ```
 
-也可在启用了官方 `plugin_manager` 工具的 Creator 会话中请求：
+也可在启用了官方 `plugin_manager` 工具的会话中请求：
 
 ```json
 {
   "action": "install_bundle",
-  "target": "/Users/lujinan/Documents/deepseek-harness/default-workspace/dsh-imagegen"
+  "target": "git+https://github.com/Lujinan991/dsh-imagegen.git"
 }
+```
+
+本地开发时改为填入插件目录（或以 `link:` 依赖安装），这样源码改动会在下次启动生效：
+
+```text
+/absolute/path/to/dsh-imagegen
 ```
 
 安装后确认插件行 `dsh-imagegen` 已启用。读取安装结果的 `application`：`applied` 表示已应用，`restart-required` 表示需重启。
 
-**改动插件代码后必须完全退出应用再重新打开（⌘Q 后重启），只在「插件」页面切换开关是无效的。** 客户端代码在应用启动时被物化进浏览器模块表，切换开关不会重建它，所以旧代码会继续生效并报同样的错。
-
-插件是本地目录 link 安装，源码改动会在下一次启动时生效，不需要重新安装。
+**改动插件代码后必须完全退出应用再重新打开（⌘Q 后重启），只在「插件」页面切换开关是无效的。** 客户端代码在应用启动时被物化进浏览器模块表，切换开关不会重建它，所以旧代码会继续生效并报同样的错。从 git 安装时，更新同样需要重新安装 + 重启。
 
 ## 配置
 
