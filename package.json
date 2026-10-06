@@ -1,0 +1,63 @@
+{
+  "name": "@local/dsh-imagegen",
+  "version": "0.1.0",
+  "private": true,
+  "description": "OpenAI-compatible image generation and editing for DeepSeek Harness.",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "image-api.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-tool",
+        "@deepseek-ai/dsh-client-ui-attachment",
+        "@deepseek-ai/dsh-client-ui-settings"
+      ]
+    }
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@deepseek-ai/dsh-tools": "0.2.0-rc.2",
+    "@deepseek-ai/dsh-attachment": "0.2.0-rc.2",
+    "@deepseek-ai/schemastery": "3.18.4"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-tools": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-attachment": {
+      "optional": true
+    },
+    "@deepseek-ai/schemastery": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "test:ui": "node tests/ui-smoke.mjs"
+  }
+}
